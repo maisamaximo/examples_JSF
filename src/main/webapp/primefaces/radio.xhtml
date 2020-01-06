@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<title>Treinamento JSF e Primefaces</title>
+</h:head>
+<h:body>
+	<h1>RADIO</h1>
+
+	<h:form>
+		<p:panelGrid columns="2">
+			<p:selectOneRadio value="#{clienteBean.tipoPessoa}">
+				<f:selectItem itemLabel="Física" itemValue="FISICA" />
+				<f:selectItem itemLabel="Juridica" itemValue="JURIDICA" />
+				<p:ajax event="click" update="input" process="@this"></p:ajax>
+
+				<p:selectManyCheckbox layout="pageDiraction">
+					<f:selectItem itemLabel="Barcelona" itemValue="barcelona" />
+					<f:selectItem itemLabel="Paris" itemValue="paris" />
+					<f:selectItem itemLabel="Madri" itemValue="madri" />
+				</p:selectManyCheckbox>
+			</p:selectOneRadio>
+
+			<h:panelGroup id="input">
+				<p:inputMask mask="999.999.999-99" value="CPF" id="cpf"
+					rendered="#{clienteBean.tipoPessoa eq 'FISICA'}" required="true"></p:inputMask>
+				<p:inputMask mask="99.999.999/9999-99" value="CNPJ" id="cnpj"
+					rendered="#{clienteBean.tipoPessoa eq 'JURIDICA'}" required="true"></p:inputMask>
+
+			</h:panelGroup>
+		</p:panelGrid>
+	</h:form>
+</h:body>
+</html>
